@@ -207,6 +207,8 @@ python scripts/stock/fund_flow.py sector-hist --board 银行 [--json]           
 python scripts/stock/special.py lhb-detail --start 20250320 --end 20250328 [--json]
 python scripts/stock/special.py lhb-stock --code 000001 [--json]
 python scripts/stock/special.py lhb-stat [--json]
+python scripts/stock/special.py lhb-inst [--json]       # 机构统计
+python scripts/stock/special.py lhb-trader [--json]     # 营业部统计
 ```
 
 ### 涨跌停
@@ -216,6 +218,8 @@ python scripts/stock/special.py zt-pool --date 20250328 [--json]     # 涨停池
 python scripts/stock/special.py dt-pool --date 20250328 [--json]     # 跌停池
 python scripts/stock/special.py zt-strong --date 20250328 [--json]   # 强势股池
 python scripts/stock/special.py zt-previous --date 20250328 [--json] # 昨日涨停
+python scripts/stock/special.py zt-sub-new --date 20250328 [--json]  # 次新股涨停
+python scripts/stock/special.py zt-zbgc --date 20250328 [--json]     # 涨停不打开
 ```
 
 ### 融资融券
@@ -224,6 +228,54 @@ python scripts/stock/special.py zt-previous --date 20250328 [--json] # 昨日涨
 python scripts/stock/special.py margin-sse --start 20250301 --end 20250328 [--json]
 python scripts/stock/special.py margin-szse --date 20250301 [--json]
 python scripts/stock/special.py margin-ratio [--json]
+```
+
+### 股权质押
+
+```bash
+python scripts/stock/special.py pledge-profile [--json]                       # 质押市场概况
+python scripts/stock/special.py pledge-ratio [--json]                         # 上市公司质押比例
+python scripts/stock/special.py pledge-detail --code 000001 [--json]          # 个股质押明细
+python scripts/stock/special.py pledge-bank [--json]                          # 银行质押分布
+python scripts/stock/special.py pledge-company [--json]                       # 券商质押分布
+python scripts/stock/special.py pledge-industry [--json]                      # 行业质押数据
+```
+
+### 商誉
+
+```bash
+python scripts/stock/special.py goodwill-profile [--json]                     # 商誉市场概况
+python scripts/stock/special.py goodwill-expected [--json]                    # 减值预期明细
+python scripts/stock/special.py goodwill-detail --code 000001 [--json]        # 个股减值明细
+python scripts/stock/special.py goodwill-stock --code 000001 [--json]         # 个股商誉明细
+python scripts/stock/special.py goodwill-industry [--json]                    # 行业商誉
+```
+
+### 机构调研
+
+```bash
+python scripts/stock/special.py inst-research-stat [--json]                   # 调研统计
+python scripts/stock/special.py inst-research-detail --code 000001 [--json]   # 个股调研详情
+python scripts/stock/special.py analyst-rank [--json]                         # 分析师排名
+python scripts/stock/special.py inst-recommend [--json]                       # 机构推荐
+```
+
+### 大宗交易
+
+```bash
+python scripts/stock/special.py block-daily --date 20250328 [--json]          # 每日统计
+python scripts/stock/special.py block-detail --date 20250328 [--json]         # 每日明细
+python scripts/stock/special.py block-sector --date 20250328 [--json]         # 行业成交统计
+python scripts/stock/special.py block-sector-rank --date 20250328 [--json]    # 营业部排行
+```
+
+### 可转债
+
+```bash
+python scripts/stock/special.py convert-bond-jsl [--json]                     # 可转债实时数据（集思录）
+python scripts/stock/special.py convert-bond-redeem [--json]                  # 可转债强赎
+python scripts/stock/special.py convert-bond-index [--json]                   # 等权指数
+python scripts/stock/special.py convert-bond-adj [--json]                     # 转股价变动
 ```
 
 ### IPO / 解禁
