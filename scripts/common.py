@@ -127,6 +127,48 @@ def safe_float(val) -> Optional[float]:
         return None
 
 
+# ── Stock code validation ────────────────────────────────────────────────────
+
+import re
+
+def validate_stock_code(code: str, market: str = "auto") -> bool:
+    """
+    Validate stock code format.
+    Returns True if valid, calls error() on failure.
+
+    Supported formats:
+      - A股: 6 digits (6xxxxx沪, 0xxxxx深, 3xxxxx创业板, 688xxx科创板, 8/4xxxxx北证)
+      - 港股: 5 digits (e.g., 00700)
+      - 美股: 1-5 uppercase letters (e.g., AAPL)
+      - 指数: sh000001 / sz399001 等前缀格式，或纯数字
+    """
+    if not code:
+        error("股票代码不能为空")
+
+    code = code.strip()
+
+    # US stock: letters only
+    if re.match(r'^[A-Z]{1,5}$', code):
+        return True
+
+    # Index with prefix: sh000001, sz399001
+    if re.match(r'^(sh|sz|bj)\d{6}$', code):
+        return True
+
+    # Pure digits
+    if re.match(r'^\d+$', code):
+        # A股: 6 digits
+        if len(code) == 6:
+            return True
+        # 港股: 5 digits
+        if len(code) == 5:
+            return True
+        # 其他长度数字
+        error(f"股票代码格式错误: '{code}'（A股/指数需6位，港股需5位）")
+
+    error(f"股票代码格式错误: '{code}'（A股: 6位数字，港股: 5位数字，美股: 大写字母）")
+
+
 def format_number(n, unit: str = "") -> str:
     """Format large numbers with 万/亿."""
     if n is None:

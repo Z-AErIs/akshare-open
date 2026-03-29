@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))  # for common.py in parent
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 @timeout(15)
@@ -94,6 +94,8 @@ def main():
 
     if args.action in ("individual", "individual-hist") and not args.code:
         error("--code is required")
+    if args.code:
+        validate_stock_code(args.code)
     if args.action == "sector-hist" and not args.board:
         error("--board is required")
 

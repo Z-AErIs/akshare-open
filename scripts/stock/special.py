@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -467,6 +467,9 @@ def main():
     parser.add_argument("--symbol", default="沪股通", help="For hsgt-hist")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+
+    if args.code:
+        validate_stock_code(args.code)
 
     j = args.json
     h = {

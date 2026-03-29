@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))  # for common.py in parent
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 def _full_code(code: str) -> str:
@@ -142,6 +142,8 @@ def main():
     needs_date = args.type in ("report", "forecast", "quick-report")
     if needs_code and not args.code:
         error("--code is required")
+    if needs_code and args.code:
+        validate_stock_code(args.code)
     if needs_date and not args.date:
         error("--date is required")
 

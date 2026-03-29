@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))  # for common.py in parent
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 @timeout(30)
@@ -96,6 +96,7 @@ def main():
     parser.add_argument("--adjust", default="qfq")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+    validate_stock_code(args.code)
 
     handlers = {
         "a": lambda: hist_a(args.code, args.period, args.start, args.end, args.adjust, args.json),

@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))  # for common.py in parent
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 @timeout(30)
@@ -72,6 +72,8 @@ def main():
 
     if args.action in ("daily", "cons", "cons-weight") and not args.code:
         error("--code is required")
+    if args.code:
+        validate_stock_code(args.code)
 
     h = {
         "spot": lambda: index_spot(args.json),

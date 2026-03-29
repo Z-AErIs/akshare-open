@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, '..'))  # for common.py in parent
 import sys
 import argparse
 import akshare as ak
-from common import output, error, info, timeout
+from common import output, error, info, timeout, validate_stock_code
 
 
 @timeout(90)
@@ -148,6 +148,9 @@ def main():
 
     if args.market in ("info", "bid-ask", "info-xq") and not args.code:
         error("--code is required for info/bid-ask/info-xq")
+
+    if args.code:
+        validate_stock_code(args.code)
 
     handlers[args.market]()
 
